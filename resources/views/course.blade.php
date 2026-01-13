@@ -8,7 +8,7 @@
         <h3 class="text-lg font-semibold mb-4">Aulas do Curso</h3>
         <ul class="space-y-3 text-gray-700">
           <li>
-            <a href="{{ route('lesson') }}" class="flex items-center gap-2 hover:text-indigo-600">
+            <a href="{{ route('lesson.index') }}" class="flex items-center gap-2 hover:text-indigo-600">
               <span class="text-sm">1.</span> Introdução ao Curso
             </a>
           </li>
