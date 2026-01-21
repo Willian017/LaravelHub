@@ -17,10 +17,32 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
     protected $fillable = [
-        'name',
+        'firstName',
+        'lastName',
         'email',
-        'password',
+        'password'
     ];
 
     /**
