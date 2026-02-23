@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -25,9 +27,25 @@ class LoginController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
-        //
+        // dd(collect($request->validated()) -> only(['email'])->toArray());
+        // dd(collect($request->safe()) -> only(['email'])->toArray());
+
+        User::create($request->validated());
+        
+        // $request->validate([
+        //     'email' => 'required|email',
+        //     'password' => 'required|min:3',
+        //     'password_confirmation' => 'same:password'
+        // ],
+        // [
+        //     'email.required' => 'O campo email é obrigatório',
+        //     'email.email' => 'O campo email tem que ser obrigatóriamente um email',
+        //     'password.required' => 'O campo password é obrigatório',
+        //     'password.min' => 'O campo password tem que conter no mínimo :min caracteres',
+        //     'password_confirmation.same' => 'O campo de confirmação deve ser igual a senha'
+        // ]);
     }
 
     /**

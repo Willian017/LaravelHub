@@ -44,5 +44,9 @@ Route::get('/contato', [ContactController::class,'index'])->name('contact.index'
 // Route::post('/login',[LoginController::class, 'store'])->name('login.store');
 
 Route::resource('login', LoginController::class)->only([
-    'index', 'store'
+    'index', 'store', 'destroy'
 ]);
+
+// Route::resource('login', LoginController::class)->except([
+//     'index', 'store'
+// ]);
