@@ -28,14 +28,14 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    public function messages(): array
-    {
-        return [
-            'email.required' => 'O campo email é obrigatório',
-            'email.email' => 'O campo email tem que ser obrigatóriamente um email',
-            'password.required' => 'O campo password é obrigatório',
-            'password.min' => 'O campo password tem que conter no mínimo :min caracteres',
-            'password_confirmation.same' => 'O campo de confirmação deve ser igual a senha'
-        ];
-    }
+    // public function messages(): array
+    // {
+    //     return [
+    //         'email.required' => 'O campo email é obrigatório',
+    //         'email.email' => 'O campo email tem que ser obrigatóriamente um email',
+    //         'password.required' => 'O campo password é obrigatório',
+    //         'password.min' => 'O campo password tem que conter no mínimo :min caracteres',
+    //         'password_confirmation.same' => 'O campo de confirmação deve ser igual a senha'
+    //     ];
+    // }
 }

@@ -15,6 +15,30 @@
         </div>
       @endif --}}
 
+      @php
+        $types = ['login_success','logout_success'];
+      @endphp
+
+      @foreach ($types as $type)
+        @if (session()->has($type))
+          <div class="bg-green-600 text-white text-center italic p-2 mb-2">
+            {{ session($type) }}
+          </div>
+        @endif
+      @endforeach
+
+      @if (session()->has('error'))
+        <div class="bg-red-600 text-white text-center italic p-2 mb-2">
+          {{ session()->get('error') }}
+        </div>
+      @endif
+
+      {{-- @if ($errors->has('error'))
+        <div class="bg-red-600 text-white text-center italic p-2 mb-2">
+          {{ $errors->first('error') }}
+        </div>
+      @endif --}}
+
       <form method="POST" action="{{ route('login.store') }}" class="space-y-5">
         @csrf
         <!-- E-mail -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -29,11 +30,23 @@ class LoginController extends Controller
      */
     public function store(LoginRequest $request)
     {
+        //$validated = $request->validated();
+        //if(Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']]))
+
+        if(Auth::attempt($request->safe()->only(['email','password']))){
+            $request->session()->regenerate();
+
+            return back()->with('login_success','logado com sucesso');
+            //return redirect()->intended('dashboard');
+        }
+
+        return back()->with([
+            'error' => 'The provided credentials do not match out records'
+        ])->onlyInput('email');
+
         // dd(collect($request->validated()) -> only(['email'])->toArray());
         // dd(collect($request->safe()) -> only(['email'])->toArray());
 
-        User::create($request->validated());
-        
         // $request->validate([
         //     'email' => 'required|email',
         //     'password' => 'required|min:3',
@@ -75,8 +88,10 @@ class LoginController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy()
     {
-        //
+        Auth::logout();
+
+        return back()->with('logout_success','logout feito com sucesso');
     }
 }
