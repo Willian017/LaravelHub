@@ -47,7 +47,7 @@ Route::resource('login', LoginController::class)->only([
     'index', 'store'
 ]);
 
-Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
+Route::delete('/logout', [LoginController::class, 'destroy'])->name('logout');
 
 // Route::resource('login', LoginController::class)->except([
 //     'index', 'store'
