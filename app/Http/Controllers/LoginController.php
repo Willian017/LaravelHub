@@ -6,12 +6,22 @@ use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class LoginController extends Controller
+class LoginController extends Controller implements HasMiddleware
 {
     /**
      * Display a listing of the resource.
      */
+
+    public static function middleware()
+    {
+        return [
+            new Middleware('guest',only:['index','store'])
+        ];
+    }
+
     public function index()
     {
         return view('login', ['title' => 'Login']);
@@ -36,7 +46,7 @@ class LoginController extends Controller
         if(Auth::attempt($request->safe()->only(['email','password']))){
             $request->session()->regenerate();
 
-            return back()->with('login_success','logado com sucesso');
+            return redirect()->route('home.index');
             //return redirect()->intended('dashboard');
         }
 

@@ -35,7 +35,7 @@ Route::get('/',[HomeController::class, 'index'])->name('home.index');
 
 
 
-Route::get('/curso',[CourseController::class, 'index'])->name('course.index');
+Route::get('/curso',[CourseController::class, 'index'])->name('course.index')->middleware('auth');
 Route::get('/cursos',[CoursesController::class, 'index'])->name('courses.index');
 Route::get('/checkout',[CheckoutController::class, 'index'])->name('checkout.index');
 Route::get('/licao',[LessonController::class, 'index'])->name('lesson.index');
@@ -45,7 +45,7 @@ Route::get('/contato', [ContactController::class,'index'])->name('contact.index'
 
 Route::resource('login', LoginController::class)->only([
     'index', 'store'
-]);
+])->middleware('guest');
 
 Route::delete('/logout', [LoginController::class, 'destroy'])->name('logout');
 
